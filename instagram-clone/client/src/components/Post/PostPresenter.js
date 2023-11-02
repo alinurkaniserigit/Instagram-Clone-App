@@ -1,11 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import TextareaAutosize from 'react-autosize-textarea'
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import TextareaAutosize from 'react-autosize-textarea';
 
-import { HeartFull, HeartEmpty, Comment as CommentIcon } from '../Icons'
-import FatText from '../FatText'
-import Avatar from '../Avatar'
+import { HeartFull, HeartEmpty, Comment as CommentIcon } from '../Icons';
+import FatText from '../FatText';
+import Avatar from '../Avatar';
 
 const Post = styled.div`
   ${({ theme }) => theme.whiteBox};
@@ -16,23 +16,23 @@ const Post = styled.div`
   a {
     color: inherit;
   }
-`
+`;
 
 const Header = styled.header`
   padding: 15px;
   display: flex;
   align-items: center;
-`
+`;
 
 const UserColumn = styled.div`
   margin-left: 10px;
-`
+`;
 
 const Location = styled.span`
   display: block;
   margin-top: 5px;
   font-size: 12px;
-`
+`;
 
 const Files = styled.div`
   position: relative;
@@ -41,7 +41,7 @@ const Files = styled.div`
   flex-direction: column;
   align-items: stretch;
   flex-shrink: 0;
-`
+`;
 
 const File = styled.div`
   max-width: 100%;
@@ -54,15 +54,15 @@ const File = styled.div`
   background-position: center;
   opacity: ${props => (props.showing ? 1 : 0)};
   transition: opacity 0.5s linear;
-`
+`;
 
 const Button = styled.span`
   cursor: pointer;
-`
+`;
 
 const Meta = styled.div`
   padding: 15px;
-`
+`;
 
 const Buttons = styled.div`
   ${Button} {
@@ -71,7 +71,7 @@ const Buttons = styled.div`
     }
   }
   margin-bottom: 10px;
-`
+`;
 
 const Timestamp = styled.span`
   font-weight: 400;
@@ -82,7 +82,7 @@ const Timestamp = styled.span`
   margin: 10px 0px;
   padding-bottom: 10px;
   border-bottom: ${({ theme }) => theme.lightGreyColor} 1px solid;
-`
+`;
 
 const Textarea = styled(TextareaAutosize)`
   border: none;
@@ -92,24 +92,24 @@ const Textarea = styled(TextareaAutosize)`
   &:focus {
     outline: none;
   }
-`
+`;
 
 const Comments = styled.ul`
   margin-top: 10px;
-`
+`;
 
 const Comment = styled.li`
   margin-bottom: 7px;
   span {
     margin-right: 5px;
   }
-`
+`;
 
 const Caption = styled.div`
   margin: 10px 0px;
-`
+`;
 
-export default ({
+const PostComponent = ({
   user: { userName, avatar },
   location,
   files,
@@ -178,4 +178,6 @@ export default ({
       />
     </Meta>
   </Post>
-)
+);
+
+export default PostComponent;

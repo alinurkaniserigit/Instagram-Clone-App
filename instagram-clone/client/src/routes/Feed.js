@@ -1,11 +1,11 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import styled from 'styled-components'
-import { gql } from 'apollo-boost'
-import { useQuery } from '@apollo/react-hooks'
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 
-import Loader from '../components/Loader'
-import Post from '../components/Post'
+import Loader from '../components/Loader';
+import Post from '../components/Post';
 
 const FEED_QUERY = gql`
   {
@@ -35,17 +35,10 @@ const FEED_QUERY = gql`
       createdAt
     }
   }
-`
+`;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 80vh;
-`
-
-export default () => {
-  const { data, loading } = useQuery(FEED_QUERY)
+const Feed = () => {
+  const { data, loading } = useQuery(FEED_QUERY);
   return (
     <Wrapper>
       <Helmet>
@@ -57,5 +50,14 @@ export default () => {
         data.seeFeed &&
         data.seeFeed.map(post => <Post key={post.id} {...post} />)}
     </Wrapper>
-  )
-}
+  );
+};
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+`;
+
+export default Feed;

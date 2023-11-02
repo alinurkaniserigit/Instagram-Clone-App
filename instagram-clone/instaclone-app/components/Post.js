@@ -1,67 +1,66 @@
-import React, { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
-import { Platform, StyleSheet } from 'react-native'
-import styled from 'styled-components/native'
-import Swiper from 'react-native-swiper'
-import themeColors from '../styles'
-import { useNavigation } from '@react-navigation/native'
+import React, { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { Platform, StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+import themeColors from '../styles';
+import { useNavigation } from '@react-navigation/native';
 
-import { gql } from 'apollo-boost'
-import { useMutation } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
 
 export const TOGGLE_LIKE = gql`
-  mutation toggelLike($postId: String!) {
+  mutation toggleLike($postId: String!) {
     toggleLike(postId: $postId)
   }
-`
+`;
 
-import { Ionicons } from '@expo/vector-icons'
-import constants from '../constants'
+import { Ionicons } from '@expo/vector-icons';
+import constants from '../constants';
 
 const Container = styled.View`
   margin-bottom: 40px;
-`
+`;
 const Header = styled.View`
   padding: 15px;
   flex-direction: row;
   align-items: center;
-`
+`;
 const Avatar = styled.Image`
   height: 40px;
   width: 40px;
   border-radius: 20px;
-`
-const Touchable = styled.TouchableOpacity``
+`;
+const Touchable = styled.TouchableOpacity;
 const HeaderUserContainer = styled.View`
   margin-left: 10px;
-`
+`;
 const Bold = styled.Text`
   font-weight: 500;
-`
+`;
 const Location = styled.Text`
   font-size: 12px;
-`
+`;
 const Image = styled.Image`
   width: ${constants.width}px;
   height: ${constants.height / 2.5}px;
-`
+`;
 const IconsContainer = styled.View`
   flex-direction: row;
   margin-bottom: 5px;
-`
+`;
 const IconContainer = styled.View`
   margin-right: 10px;
-`
+`;
 const InfoContainer = styled.View`
   padding: 20px 10px 10px;
-`
+`;
 const Caption = styled.Text`
   margin: 5px 0px;
-`
+`;
 const CommentCount = styled.Text`
   opacity: 0.5;
   font-size: 13px;
-`
+`;
 
 const Post = ({
   id,
@@ -73,29 +72,29 @@ const Post = ({
   comments = [],
   isLiked: isLikedProp,
 }) => {
-  const navigation = useNavigation()
-  const [isLiked, setIsLiked] = useState(isLikedProp)
-  const [likeCount, setLikeCount] = useState(likeCountProp)
-  const [toggleLikeMutaton] = useMutation(TOGGLE_LIKE, {
+  const navigation = useNavigation();
+  const [isLiked, setIsLiked] = useState(isLikedProp);
+  const [likeCount, setLikeCount] = useState(likeCountProp);
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
     variables: {
       postId: id,
     },
-  })
+  });
   const handleLike = useCallback(async () => {
     if (isLiked === true) {
-      setLikeCount((l) => l > 0 && l - 1)
+      setLikeCount((l) => l > 0 && l - 1);
     } else {
-      setLikeCount((l) => l + 1)
+      setLikeCount((l) => l + 1);
     }
     try {
-      await toggleLikeMutaton()
-      setIsLiked((p) => !p)
+      await toggleLikeMutation();
+      setIsLiked((p) => !p);
     } catch (e) {}
-  }, [isLiked, toggleLikeMutaton])
+  }, [isLiked, toggleLikeMutation]);
   const navigateToProfile = useCallback(
     () => navigation.navigate('User', { userName: user.userName }),
     [navigation, user]
-  )
+  );
 
   return (
     <Container>
@@ -110,13 +109,9 @@ const Post = ({
           </HeaderUserContainer>
         </Touchable>
       </Header>
-      <Swiper
-        paginationStyle={styles.paginationStyle}
-        style={styles.swiperContainer}>
-        {files.map((file) => (
-          <Image key={file.id} source={{ uri: file.url }} />
-        ))}
-      </Swiper>
+      {files.length > 0 && (
+        <ImageSwiper files={files} handleLike={handleLike} isLiked={isLiked} />
+      )}
       <InfoContainer>
         <IconsContainer>
           <Touchable onPress={handleLike}>
@@ -159,8 +154,31 @@ const Post = ({
         ) : null}
       </InfoContainer>
     </Container>
-  )
-}
+  );
+};
+
+const ImageSwiper = ({ files, handleLike, isLiked }) => {
+  if (files.length === 0) return null;
+
+  return (
+    <Swiper paginationStyle={styles.paginationStyle} style={styles.swiperContainer}>
+      {files.map((file) => (
+        <Image key={file.id} source={{ uri: file.url }} />
+      ))}
+    </Swiper>
+  );
+};
+
+ImageSwiper.propTypes = {
+  files: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  handleLike: PropTypes.func.isRequired,
+  isLiked: PropTypes.bool.isRequired,
+};
 
 Post.propTypes = {
   id: PropTypes.string.isRequired,
@@ -190,7 +208,7 @@ Post.propTypes = {
   caption: PropTypes.string.isRequired,
   location: PropTypes.string,
   createdAt: PropTypes.string.isRequired,
-}
+};
 
 const styles = StyleSheet.create({
   swiperContainer: {
@@ -200,6 +218,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -20,
   },
-})
+});
 
-export default Post
+export default Post;

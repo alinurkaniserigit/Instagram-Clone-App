@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/native';
 import { Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 import { useMutation } from '@apollo/react-hooks'

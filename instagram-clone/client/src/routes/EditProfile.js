@@ -1,1 +1,3 @@
-export default () => 'EditProfile'
+const EditProfile = () => 'EditProfile';
+
+export default EditProfile;

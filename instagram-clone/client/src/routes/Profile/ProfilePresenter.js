@@ -1,17 +1,17 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { Helmet } from 'react-helmet'
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { Helmet } from 'react-helmet';
 
-import Loader from '../../components/Loader'
-import Avatar from '../../components/Avatar'
-import FatText from '../../components/FatText'
-import FollowButton from '../../components/FollowButton'
-import SquarePost from '../../components/SquarePost'
-import Button from '../../components/Button'
+import Loader from '../../components/Loader';
+import Avatar from '../../components/Avatar';
+import FatText from '../../components/FatText';
+import FollowButton from '../../components/FollowButton';
+import SquarePost from '../../components/SquarePost';
+import Button from '../../components/Button';
 
 const Wrapper = styled.div`
   min-height: 100vh;
-`
+`;
 
 const Header = styled.header`
   display: flex;
@@ -22,7 +22,7 @@ const Header = styled.header`
   margin-bottom: 40px;
   padding-bottom: 20px;
   border-bottom: 1px solid lightgray;
-`
+`;
 
 const HeaderColumn = styled.div`
   justify-content: center;
@@ -31,53 +31,53 @@ const HeaderColumn = styled.div`
     max-width: ${maxWidth};
     display: ${display};
   `}
-`
+`;
 
 const UserNameRow = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 const UserName = styled.span`
   font-size: 26px;
   display: block;
   margin-right: 30px;
-`
+`;
 
 const Counts = styled.ul`
   display: flex;
   margin: 15px 0px;
-`
+`;
 
 const Count = styled.li`
   font-size: 16px;
   &:not(:last-child) {
     margin-right: 10px;
   }
-`
+`;
 
 const FullName = styled(FatText)`
   font-size: 16px;
-`
+`;
 
 const Bio = styled.p`
   margin: 10px 0px;
-`
+`;
 
 const Posts = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 295px;
   grid-gap: 30px;
-`
+`;
 
-export default ({ loading, data, logOut }) => {
+const Profile = ({ loading, data, logOut }) => {
   if (loading === true) {
     return (
       <Wrapper>
         <Loader />
       </Wrapper>
-    )
+    );
   } else if (!loading && data && data.seeUser) {
     const {
       seeUser: {
@@ -93,7 +93,7 @@ export default ({ loading, data, logOut }) => {
         postsCount,
         posts,
       },
-    } = data
+    } = data;
     return (
       <Wrapper>
         <Helmet>
@@ -140,7 +140,9 @@ export default ({ loading, data, logOut }) => {
             ))}
         </Posts>
       </Wrapper>
-    )
+    );
   }
-  return null
-}
+  return null;
+};
+
+export default Profile;

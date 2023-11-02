@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import styled from 'styled-components'
+import styled from 'styled-components/native';
+
 
 import * as Permissions from 'expo-permissions'
 import * as MediaLibrary from 'expo-media-library'

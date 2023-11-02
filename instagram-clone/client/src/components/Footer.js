@@ -1,35 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-const Footer = styled.footer`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 12px;
-  margin: 50px 0px;
-`
-
-const List = styled.ul`
-  display: flex;
-`
-
-const ListItem = styled.li`
-  &:not(:last-child) {
-    margin-right: 16px;
-  }
-`
-
-const Link = styled.a`
-  color: ${({ theme }) => theme.darkBlueColor};
-`
-
-const Copyright = styled.span`
-  color: ${({ theme }) => theme.darkGreyColor};
-`
-
-export default () => (
+const FooterComponent = () => (
   <Footer>
     <List>
       <ListItem>
@@ -68,4 +40,34 @@ export default () => (
     </List>
     <Copyright>Instaclone {new Date().getFullYear()} &copy;</Copyright>
   </Footer>
-)
+);
+
+const Footer = styled.footer`
+  display: flex;
+  justify-content: space between;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  margin: 50px 0px;
+`;
+
+const List = styled.ul`
+  display: flex;
+`;
+
+const ListItem = styled.li`
+  &:not(:last-child) {
+    margin-right: 16px;
+  }
+`;
+
+const Link = styled.a`
+  color: ${({ theme }) => theme.darkBlueColor};
+`;
+
+const Copyright = styled.span`
+  color: ${({ theme }) => theme.darkGreyColor};
+`;
+
+export default FooterComponent;

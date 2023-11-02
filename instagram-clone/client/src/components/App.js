@@ -24,11 +24,11 @@ const Wrapper = styled.div`
   width: 100%;
 `
 
-export default () => {
+const App = () => {
   const {
     data: { isLoggedIn },
   } = useQuery(QUERY)
-  return (
+  return null (
     <ThemeProvider theme={Theme}>
       <>
         <GlobalStyles />
@@ -46,3 +46,5 @@ export default () => {
     </ThemeProvider>
   )
 }
+
+export default App
